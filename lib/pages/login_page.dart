@@ -31,33 +31,37 @@ class _LoginPageState extends State<LoginPage> {
                 TextFormField(
                   controller: email,
                   keyboardType: TextInputType.emailAddress,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                   decoration: const InputDecoration(
                       labelText: "Correo electrónico",
                       border: OutlineInputBorder(),
                       suffixIcon: Icon(Icons.email_outlined, color: Colors.blue, size: 24)),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 TextFormField(
                   controller: password,
                   keyboardType: TextInputType.number,
                   obscureText: true,
+                  style: const TextStyle(fontWeight: FontWeight.w700),
                   decoration: const InputDecoration(
                       labelText: "Contraseña",
                       border: OutlineInputBorder(),
                       suffixIcon: Icon(Icons.key_rounded, color: Colors.blue, size: 24)),
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 ElevatedButton(
                     style: ElevatedButton.styleFrom(
                         fixedSize: const Size(200, 50),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
-                        textStyle: const TextStyle(fontSize: 20)),
+                        textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
                     onPressed: () {},
                     child: const Text("Iniciar sesión")
                 ),
-                const SizedBox(height: 20),
+                const SizedBox(height: 30),
                 TextButton(
-                    style: TextButton.styleFrom(textStyle: const TextStyle(fontSize: 16, color: Colors.teal)),
+                    style: TextButton.styleFrom(
+                        textStyle: const TextStyle(fontSize: 16, color: Colors.teal, fontWeight: FontWeight.w700)
+                    ),
                     onPressed: (){
                       Navigator.push(context, MaterialPageRoute(builder: (context) => const RegisterPage()));
                     },
