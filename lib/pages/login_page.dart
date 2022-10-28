@@ -1,5 +1,6 @@
 // ignore_for_file: sort_child_properties_last
 import 'package:flutter/material.dart';
+import 'package:sprint_dos/pages/poi_page.dart';
 import 'package:sprint_dos/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -13,6 +14,32 @@ class _LoginPageState extends State<LoginPage> {
 
   final email = TextEditingController();
   final password = TextEditingController();
+
+  void validUser(){
+    if(email.text.isNotEmpty && password.text.isNotEmpty){
+      if (email.text == "test@gmail.com" && password.text == "1234") {
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PoiPage()));
+      } else {
+        showMessage("Datos incorrectos");
+      }
+    }else{
+      showMessage("Se requieren todos los datos para ingresar");
+    }
+  }
+
+  void showMessage(String msg){
+    final screen = ScaffoldMessenger.of(context);
+    screen.showSnackBar(SnackBar(
+      content: Text(msg, style: const TextStyle(fontSize: 18)),
+      backgroundColor: const Color(0xFFFF9800),
+      duration: const Duration(seconds: 7),
+      action: SnackBarAction(
+        label: "OK",
+        onPressed: screen.hideCurrentSnackBar,
+      ),
+    )
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -35,7 +62,8 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                       labelText: "Correo electrónico",
                       border: OutlineInputBorder(),
-                      suffixIcon: Icon(Icons.email_outlined, color: Colors.blue, size: 24)),
+                      suffixIcon: Icon(Icons.email_outlined, color: Colors.blue, size: 24)
+                  ),
                 ),
                 const SizedBox(height: 30),
                 TextFormField(
@@ -46,7 +74,8 @@ class _LoginPageState extends State<LoginPage> {
                   decoration: const InputDecoration(
                       labelText: "Contraseña",
                       border: OutlineInputBorder(),
-                      suffixIcon: Icon(Icons.key_rounded, color: Colors.blue, size: 24)),
+                      suffixIcon: Icon(Icons.key_rounded, color: Colors.blue, size: 24)
+                  ),
                 ),
                 const SizedBox(height: 30),
                 ElevatedButton(
@@ -54,7 +83,7 @@ class _LoginPageState extends State<LoginPage> {
                         fixedSize: const Size(200, 50),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                         textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                    onPressed: () {},
+                    onPressed: () {validUser();},
                     child: const Text("Iniciar sesión")
                 ),
                 const SizedBox(height: 30),
