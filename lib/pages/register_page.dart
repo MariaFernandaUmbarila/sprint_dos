@@ -48,7 +48,7 @@ class _RegisterPageState extends State<RegisterPage> {
 
       if(password_repeat.text == password.text){
         if(formNotEmpty){
-          var newUser = Usuario("", email, nombre, celular, password);
+          var newUser = Usuario("", email.text, nombre.text, celular.text, password.text);
           saveUser(newUser);
         }else{
           msg.showMessage("Complete todos los datos");
