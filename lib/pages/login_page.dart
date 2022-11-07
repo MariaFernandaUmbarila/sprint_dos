@@ -1,6 +1,8 @@
 // ignore_for_file: sort_child_properties_last
 import 'package:flutter/material.dart';
+import 'package:sprint_dos/classes/message_class.dart';
 import 'package:sprint_dos/pages/poi_page.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sprint_dos/pages/register_page.dart';
 
 class LoginPage extends StatefulWidget {
@@ -15,34 +17,38 @@ class _LoginPageState extends State<LoginPage> {
   final email = TextEditingController();
   final password = TextEditingController();
 
-  void validUser(){
-    if(email.text.isNotEmpty && password.text.isNotEmpty){
-      if (email.text == "test@gmail.com" && password.text == "1234") {
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PoiPage()));
-      } else {
-        showMessage("Datos incorrectos");
-      }
-    }else{
-      showMessage("Se requieren todos los datos para ingresar");
-    }
-  }
+  FirebaseAuth auth = FirebaseAuth.instance;
 
-  void showMessage(String msg){
-    final screen = ScaffoldMessenger.of(context);
-    screen.showSnackBar(SnackBar(
-      content: Text(msg, style: const TextStyle(fontSize: 18)),
-      backgroundColor: const Color(0xFFFF9800),
-      duration: const Duration(seconds: 7),
-      action: SnackBarAction(
-        label: "OK",
-        onPressed: screen.hideCurrentSnackBar,
-      ),
-    )
-    );
+  late Message msg;
+
+  void validUser() async{
+    try {
+      final user = await auth.signInWithEmailAndPassword(email: email.text, password: password.text);
+      if(user != null){
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PoiPage()));
+      }
+    }on FirebaseAuthException catch(e){
+      if(e.code == "invalid-email"){
+        msg.showMessage("Ingrese un email válido");
+      }
+      if(e.code == "user-not-found"){
+        msg.showMessage("El ususario ingresado no existe");
+      }
+      if(e.code == "wrong-password"){
+        msg.showMessage("La contraseña es incorrecta");
+      }
+      if(e.code == "unknown"){
+        msg.showMessage("Complete todos los datos");
+      }
+      if(e.code == "network-request-failed"){
+        msg.showMessage("No se encontró conexión a Internet");
+      }
+    }
   }
 
   @override
   Widget build(BuildContext context) {
+    msg = Message(context);
     return Scaffold(
       body: SingleChildScrollView(
         child: Padding(
