@@ -1,4 +1,5 @@
 class Usuario{
+
   var _id, _email, _nombre, _celular, _password;
 
   Usuario(this._id, this._email, this._nombre, this._celular, this._password);

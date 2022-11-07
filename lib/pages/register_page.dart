@@ -1,5 +1,4 @@
 // ignore_for_file: sort_child_properties_last, non_constant_identifier_names
-import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:sprint_dos/classes/message_class.dart';
 import 'package:sprint_dos/model/user_model.dart';
@@ -139,7 +138,7 @@ class _RegisterPageState extends State<RegisterPage> {
                         fixedSize: const Size(200, 50),
                         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(30)),
                         textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700)),
-                    onPressed: () {},
+                    onPressed: () {bringData();},
                     child: const Text("Registrar")
                 ),
                 const SizedBox(height: 30),
