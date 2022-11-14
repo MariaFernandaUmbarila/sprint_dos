@@ -5,14 +5,14 @@ import 'package:sprint_dos/model/poi_model.dart';
 import 'package:sprint_dos/pages/menu_page.dart';
 import 'package:sprint_dos/pages/poi_page.dart';
 
-class ListPoiPage extends StatefulWidget {
-  const ListPoiPage({Key? key}) : super(key: key);
+class FavoritePage extends StatefulWidget {
+  const FavoritePage({Key? key}) : super(key: key);
 
   @override
-  State<ListPoiPage> createState() => _ListPoiPageState();
+  State<FavoritePage> createState() => _FavoritePageState();
 }
 
-class _ListPoiPageState extends State<ListPoiPage> {
+class _FavoritePageState extends State<FavoritePage> {
 
   List sitios = [];
   late Message msg;
@@ -41,11 +41,11 @@ class _ListPoiPageState extends State<ListPoiPage> {
     msg = Message(context);
     return Scaffold(
       appBar: AppBar(
-          title: const Text(
-              "Sitios turísticos",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)
-          ),
-          backgroundColor: Colors.cyan,
+        title: const Text(
+            "Tus sitios turísticos favoritos",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)
+        ),
+        backgroundColor: Colors.cyan,
       ),
       drawer: MenuPage(),
       body: ListView.builder(

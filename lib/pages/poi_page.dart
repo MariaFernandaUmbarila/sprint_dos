@@ -1,6 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 import 'package:flutter/material.dart';
 import 'package:sprint_dos/model/poi_model.dart';
+import 'package:sprint_dos/pages/menu_page.dart';
 
 class PoiPage extends StatefulWidget {
   final POIData poiData;
@@ -22,6 +23,7 @@ class _PoiPageState extends State<PoiPage> {
         ),
         backgroundColor: Colors.cyan,
       ),
+      drawer: MenuPage(),
       body: SingleChildScrollView(
         child: Padding(
             padding: const EdgeInsets.symmetric(vertical: 50, horizontal: 40),
