@@ -1,7 +1,7 @@
 // ignore_for_file: sort_child_properties_last
 import 'package:flutter/material.dart';
 import 'package:sprint_dos/classes/message_class.dart';
-import 'package:sprint_dos/pages/poi_page.dart';
+import 'package:sprint_dos/pages/listpoi_page.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:sprint_dos/pages/register_page.dart';
 
@@ -25,7 +25,7 @@ class _LoginPageState extends State<LoginPage> {
     try {
       final user = await auth.signInWithEmailAndPassword(email: email.text, password: password.text);
       if(user != null){
-        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const PoiPage()));
+        Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => const ListPoiPage()));
       }
     }on FirebaseAuthException catch(e){
       if(e.code == "invalid-email"){
