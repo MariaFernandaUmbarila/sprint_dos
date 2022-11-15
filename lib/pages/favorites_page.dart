@@ -67,6 +67,7 @@ class _FavoritePageState extends State<FavoritePage> {
                                 },
                                 onLongPress: (){
                                   setState(() {
+                                    msg.showMessage("Sitio eliminado de favoritos con éxito");
                                     poiBox[i].delete();
                                   });
                                 }

@@ -9,10 +9,11 @@ class Message{
     final screen = ScaffoldMessenger.of(context);
     screen.showSnackBar(SnackBar(
         content: Text(msg, style: const TextStyle(fontSize: 18)),
-        backgroundColor: const Color(0xFF0A90C0),
-        duration: const Duration(seconds: 7),
+        backgroundColor: const Color(0xFF8C7FD9),
+        duration: const Duration(seconds: 5),
         action: SnackBarAction(
           label: "OK",
+          textColor: Colors.white,
           onPressed: screen.hideCurrentSnackBar,
         ),
       )

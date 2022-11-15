@@ -49,7 +49,7 @@ class _PoiPageState extends State<PoiPage> {
 
     if(isFavorito){
       box.delete(localPoi.id);
-      msg.showMessage("El sitio ya se encuentra en favoritos");
+      msg.showMessage("Sitio eliminado de favoritos con éxito");
     }else{
       box.put(localPoi.id, localPoi);
       msg.showMessage("Agregado con éxito a favoritos");
@@ -88,19 +88,11 @@ class _PoiPageState extends State<PoiPage> {
                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   margin: const EdgeInsets.all(1),
                 ),
-                Row(
-                  children: [
-                    Expanded(
-                        child: IconButton(
-                          alignment: Alignment.center,
-                          icon: Icon(isFavorito ? Icons.favorite : Icons.favorite_border),
-                          color: Colors.red,
-                          onPressed: () {
-                            favoritoPresionado();
-                          },
-                        )
-                    )
-                  ],
+                IconButton(
+                  alignment: Alignment.center,
+                  icon: Icon(isFavorito ? Icons.favorite : Icons.favorite_border),
+                  color: Colors.red,
+                  onPressed: () {favoritoPresionado();},
                 ),
                 Text(
                     "Ciudad: ${widget.poiData.ciudad}",
