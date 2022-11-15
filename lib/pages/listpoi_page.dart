@@ -15,6 +15,7 @@ class ListPoiPage extends StatefulWidget {
 class _ListPoiPageState extends State<ListPoiPage> {
 
   List sitios = [];
+  List<dynamic> idDoc=[];
   late Message msg;
 
   @override
@@ -24,10 +25,13 @@ class _ListPoiPageState extends State<ListPoiPage> {
   }
 
   Future getSitios() async{
+    String id = "";
     QuerySnapshot sitio = await FirebaseFirestore.instance.collection("Sitios").get();
     setState(() {
       if(sitio.docs.isNotEmpty){
         for(var i in sitio.docs){
+          id = i.id; //Trae el id
+          idDoc.add(id);
           sitios.add(i.data());
         }
       }else{
@@ -73,7 +77,7 @@ class _ListPoiPageState extends State<ListPoiPage> {
                       ),
                       onTap: (){
                         POIData newPoi = POIData(sitios[i]["nombre"], sitios[i]["foto"], sitios[i]["ciudad"],
-                            sitios[i]["departamento"], sitios[i]["descripcion"], sitios[i]["temperatura"]);
+                            sitios[i]["departamento"], sitios[i]["descripcion"], sitios[i]["temperatura"], idDoc[i]);
                         Navigator.push(context, MaterialPageRoute(builder: (context)=> PoiPage(newPoi)));
                       },
                     )

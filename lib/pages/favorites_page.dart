@@ -1,6 +1,9 @@
-import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:hive/hive.dart';
+import 'package:sprint_dos/classes/boxes.dart';
 import 'package:sprint_dos/classes/message_class.dart';
+import 'package:sprint_dos/model/poi_local_model.dart';
+import 'package:hive_flutter/hive_flutter.dart';
 import 'package:sprint_dos/model/poi_model.dart';
 import 'package:sprint_dos/pages/menu_page.dart';
 import 'package:sprint_dos/pages/poi_page.dart';
@@ -14,27 +17,7 @@ class FavoritePage extends StatefulWidget {
 
 class _FavoritePageState extends State<FavoritePage> {
 
-  List sitios = [];
   late Message msg;
-
-  @override
-  void initState(){
-    super.initState();
-    getSitios();
-  }
-
-  Future getSitios() async{
-    QuerySnapshot sitio = await FirebaseFirestore.instance.collection("Sitios").get();
-    setState(() {
-      if(sitio.docs.isNotEmpty){
-        for(var i in sitio.docs){
-          sitios.add(i.data());
-        }
-      }else{
-        msg.showMessage("No se encontraron sitios");
-      }
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -48,40 +31,54 @@ class _FavoritePageState extends State<FavoritePage> {
         backgroundColor: Colors.cyan,
       ),
       drawer: MenuPage(),
-      body: ListView.builder(
-          padding: const EdgeInsets.all(10),
-          itemCount: sitios.length,
-          itemBuilder: (BuildContext context, i){
-            return Row(
-              children: [
-                Padding(
-                    padding: const EdgeInsets.all(5),
-                    child: CircleAvatar(
-                      backgroundImage: NetworkImage(sitios[i]["foto"]),
-                      radius: 50,
-                    )
-                ),
-                Expanded(
-                    child: ListTile(
-                      title: Text(
-                          sitios[i]["nombre"],
-                          style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600)
-                      ),
-                      subtitle: Text(
-                          sitios[i]["ciudad"] + " - " + sitios[i]["departamento"],
-                          style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500)
-                      ),
-                      onTap: (){
-                        POIData newPoi = POIData(sitios[i]["nombre"], sitios[i]["foto"], sitios[i]["ciudad"],
-                            sitios[i]["departamento"], sitios[i]["descripcion"], sitios[i]["temperatura"]);
-                        Navigator.push(context, MaterialPageRoute(builder: (context)=> PoiPage(newPoi)));
-                      },
-                    )
-                )
-              ],
-            );
-          }
-      ),
+      body: Padding(
+          padding: const EdgeInsets.all(5),
+          child: ValueListenableBuilder<Box<LocalPoi>>(
+              valueListenable: Boxes.getFavoritosBox().listenable(),
+              builder: (context, box, _){
+                final poiBox = box.values.toList().cast<LocalPoi>();
+                return ListView.builder(
+                    padding: const EdgeInsets.all(10),
+                    itemCount: poiBox.length,
+                    itemBuilder: (BuildContext context, i){
+                      return Row(
+                        children: [
+                          Padding(
+                              padding: const EdgeInsets.all(5),
+                              child: CircleAvatar(
+                                backgroundImage: NetworkImage(poiBox[i].foto.toString()),
+                                radius: 50,
+                              )
+                          ),
+                          Expanded(
+                              child: ListTile(
+                                title: Text(
+                                    poiBox[i].nombre.toString(),
+                                    style: const TextStyle(fontSize: 20, color: Colors.black, fontWeight: FontWeight.w600)
+                                ),
+                                subtitle: Text(
+                                    "${poiBox[i].ciudad} - ${poiBox[i].departamento}",
+                                    style: const TextStyle(fontSize: 18, color: Colors.black, fontWeight: FontWeight.w500)
+                                ),
+                                onTap: (){
+                                  POIData newPoi = POIData(poiBox[i].nombre.toString(), poiBox[i].foto.toString(), poiBox[i].ciudad.toString(),
+                                      poiBox[i].departamento.toString(), poiBox[i].descripcion.toString(), poiBox[i].temperatura.toString(), poiBox[i].id.toString());
+                                  Navigator.push(context, MaterialPageRoute(builder: (context)=> PoiPage(newPoi)));
+                                },
+                                onLongPress: (){
+                                  setState(() {
+                                    poiBox[i].delete();
+                                  });
+                                }
+                              )
+                          )
+                        ],
+                      );
+                    }
+                );
+              }
+          )
+      )
     );
   }
 }
