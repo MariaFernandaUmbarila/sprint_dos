@@ -88,12 +88,18 @@ class _PoiPageState extends State<PoiPage> {
                   padding: const EdgeInsets.symmetric(vertical: 5, horizontal: 5),
                   margin: const EdgeInsets.all(1),
                 ),
+                const Text(
+                  "Agregar a favoritos",
+                  style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600, color: Colors.red),
+                  textAlign: TextAlign.center,
+                ),
                 IconButton(
                   alignment: Alignment.center,
                   icon: Icon(isFavorito ? Icons.favorite : Icons.favorite_border),
                   color: Colors.red,
                   onPressed: () {favoritoPresionado();},
                 ),
+                const SizedBox(height: 20),
                 Text(
                     "Ciudad: ${widget.poiData.ciudad}",
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)
@@ -112,6 +118,20 @@ class _PoiPageState extends State<PoiPage> {
                 Text(
                     "Descripción: ${widget.poiData.descripcion}",
                     style: const TextStyle(fontSize: 16, fontWeight: FontWeight.w600)
+                ),
+                const SizedBox(height: 20),
+                const Text(
+                    "Ubicar sitio en el mapa:",
+                    style: TextStyle(fontSize: 16, fontWeight: FontWeight.w600),
+                    textAlign: TextAlign.center,
+                ),
+                const SizedBox(height: 20),
+                IconButton(
+                  alignment: Alignment.center,
+                  icon: const Icon(Icons.map_outlined),
+                  iconSize: 70.0,
+                  color: Colors.orange,
+                  onPressed: () {},
                 ),
               ],
             ),

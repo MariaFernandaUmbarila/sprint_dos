@@ -90,7 +90,7 @@ class _ListPoiPageState extends State<ListPoiPage> {
                   onPressed: (){
                     setState(() {getCiudad();});
                   },
-                  padding: const EdgeInsets.only(right: 50, left: 10),
+                  padding: const EdgeInsets.only(top: 10, right: 50, left: 10),
                   icon: const Icon(Icons.search, size: 50, color: Colors.deepPurple)
               )
             ]
