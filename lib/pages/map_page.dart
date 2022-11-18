@@ -25,8 +25,11 @@ class _MapPageState extends State<MapPage> {
     msg = Message(context);
     return Scaffold(
       appBar: AppBar(
-        backgroundColor: const Color.fromARGB(255, 33, 32, 32),
-        title: const Text('Flutter MapBox'),
+        title: const Text(
+            "Mapa del sitio",
+            style: TextStyle(fontSize: 22, fontWeight: FontWeight.w900)
+        ),
+        backgroundColor: Colors.cyan,
       ),
       body: Stack(
         children: <Widget>[
@@ -34,7 +37,7 @@ class _MapPageState extends State<MapPage> {
             options: MapOptions(
               minZoom: 5,
               maxZoom: 18,
-              zoom: 13,
+              zoom: 17,
               center: LatLng(double.parse(widget.poiData.latitud), double.parse(widget.poiData.longitud))
             ),
             nonRotatedChildren: [
