@@ -5,6 +5,7 @@ import 'package:sprint_dos/model/poi_local_model.dart';
 import 'package:sprint_dos/pages/splash_page.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'package:flutter_map/flutter_map.dart';
 
 Future<void> main() async{
   WidgetsFlutterBinding.ensureInitialized();
