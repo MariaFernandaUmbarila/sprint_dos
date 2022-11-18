@@ -23,13 +23,15 @@ class LocalPoiAdapter extends TypeAdapter<LocalPoi> {
       ..departamento = fields[3] as String?
       ..descripcion = fields[4] as String?
       ..temperatura = fields[5] as String?
-      ..id = fields[6] as String?;
+      ..id = fields[6] as String?
+      ..latitud = fields[7] as String?
+      ..longitud = fields[8] as String?;
   }
 
   @override
   void write(BinaryWriter writer, LocalPoi obj) {
     writer
-      ..writeByte(7)
+      ..writeByte(9)
       ..writeByte(0)
       ..write(obj.nombre)
       ..writeByte(1)
@@ -43,7 +45,11 @@ class LocalPoiAdapter extends TypeAdapter<LocalPoi> {
       ..writeByte(5)
       ..write(obj.temperatura)
       ..writeByte(6)
-      ..write(obj.id);
+      ..write(obj.id)
+      ..writeByte(7)
+      ..write(obj.latitud)
+      ..writeByte(8)
+      ..write(obj.longitud);
   }
 
   @override

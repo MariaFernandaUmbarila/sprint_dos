@@ -44,7 +44,9 @@ class _PoiPageState extends State<PoiPage> {
     ..ciudad = widget.poiData.ciudad
     ..departamento = widget.poiData.departamento
     ..temperatura = widget.poiData.temperatura
-    ..id = widget.poiData.id;
+    ..id = widget.poiData.id
+    ..latitud = widget.poiData.latitud
+    ..longitud = widget.poiData.longitud;
 
     final box = Boxes.getFavoritosBox();
 
@@ -133,7 +135,10 @@ class _PoiPageState extends State<PoiPage> {
                   iconSize: 70.0,
                   color: Colors.orange,
                   onPressed: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (context)=> MapPage()));
+                    POIData newPoi = POIData(widget.poiData.nombre, widget.poiData.foto, widget.poiData.ciudad,
+                        widget.poiData.departamento, widget.poiData.descripcion, widget.poiData.temperatura,
+                        widget.poiData.id, widget.poiData.latitud, widget.poiData.longitud);
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> MapPage(newPoi)));
                   },
                 ),
               ],

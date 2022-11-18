@@ -25,4 +25,10 @@ class LocalPoi extends HiveObject{
 
   @HiveField(6)
   String? id;
+
+  @HiveField(7)
+  String? latitud;
+
+  @HiveField(8)
+  String? longitud;
 }

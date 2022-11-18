@@ -62,7 +62,8 @@ class _FavoritePageState extends State<FavoritePage> {
                                 ),
                                 onTap: (){
                                   POIData newPoi = POIData(poiBox[i].nombre.toString(), poiBox[i].foto.toString(), poiBox[i].ciudad.toString(),
-                                      poiBox[i].departamento.toString(), poiBox[i].descripcion.toString(), poiBox[i].temperatura.toString(), poiBox[i].id.toString());
+                                      poiBox[i].departamento.toString(), poiBox[i].descripcion.toString(), poiBox[i].temperatura.toString(), poiBox[i].id.toString(),
+                                      poiBox[i].latitud.toString(), poiBox[i].longitud.toString());
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=> PoiPage(newPoi)));
                                 },
                                 onLongPress: (){

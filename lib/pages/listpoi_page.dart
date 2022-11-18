@@ -124,7 +124,8 @@ class _ListPoiPageState extends State<ListPoiPage> {
                                 ),
                                 onTap: (){
                                   POIData newPoi = POIData(sitios[i]["nombre"], sitios[i]["foto"], sitios[i]["ciudad"],
-                                      sitios[i]["departamento"], sitios[i]["descripcion"], sitios[i]["temperatura"], idDoc[i]);
+                                      sitios[i]["departamento"], sitios[i]["descripcion"], sitios[i]["temperatura"], idDoc[i],
+                                      sitios[i]["latitud"], sitios[i]["longitud"]);
                                   Navigator.push(context, MaterialPageRoute(builder: (context)=> PoiPage(newPoi)));
                                 },
                               )
