@@ -4,6 +4,7 @@ import 'package:sprint_dos/classes/boxes.dart';
 import 'package:sprint_dos/classes/message_class.dart';
 import 'package:sprint_dos/model/poi_local_model.dart';
 import 'package:sprint_dos/model/poi_model.dart';
+import 'package:sprint_dos/pages/map_page.dart';
 import 'package:sprint_dos/pages/menu_page.dart';
 
 class PoiPage extends StatefulWidget {
@@ -131,7 +132,9 @@ class _PoiPageState extends State<PoiPage> {
                   icon: const Icon(Icons.map_outlined),
                   iconSize: 70.0,
                   color: Colors.orange,
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.push(context, MaterialPageRoute(builder: (context)=> MapPage()));
+                  },
                 ),
               ],
             ),
