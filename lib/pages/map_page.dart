@@ -1,7 +1,11 @@
 // ignore_for_file: sort_child_properties_last
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_map/flutter_map.dart';
 import 'package:sprint_dos/classes/tokens.dart';
+import 'package:latlong2/latlong.dart';
+
 
 class MapPage extends StatefulWidget {
   const MapPage({Key? key}) : super(key: key);
@@ -11,6 +15,19 @@ class MapPage extends StatefulWidget {
 }
 
 class _MapPageState extends State<MapPage> {
+
+  List coordenadas = [];
+
+  @override
+  void initState(){
+    super.initState();
+    getCoord();
+  }
+
+  Future getCoord() async{
+
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -19,13 +36,14 @@ class _MapPageState extends State<MapPage> {
         title: const Text('Flutter MapBox'),
       ),
       body: Stack(
-        children: [
+        children: <Widget>[
+          for(var i in coordenadas)
           FlutterMap(
             options: MapOptions(
               minZoom: 5,
               maxZoom: 18,
               zoom: 13,
-              center: AppConstants.myLocation,
+              center: LatLng(0.0, 0.0)
             ),
             nonRotatedChildren: [
               TileLayer(

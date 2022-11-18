@@ -31,7 +31,7 @@ class _ListPoiPageState extends State<ListPoiPage> {
     setState(() {
       if(sitio.docs.isNotEmpty){
         for(var i in sitio.docs){
-          id = i.id; //Trae el id
+          id = i.id;
           idDoc.add(id);
           sitios.add(i.data());
         }
